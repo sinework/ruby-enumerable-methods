@@ -42,7 +42,7 @@ module Enumerable
   #--------------------my_all-----------------------
   def my_all?(args = nil)
     if args.nil? == false && args.is_a?(Class) == false
-      if args.is_a?(Regexp) # Checks if regular expression is provided
+      if args.is_a?(Regexp)
         my_each { |i| return false unless !i[args].nil? || i[args] == 1 } # if Regexp
       else
         my_each { |i| return false unless i == args }
@@ -59,6 +59,56 @@ module Enumerable
     end
     true
   end
+#-------------------my_any?-----------------------
 
-  # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+def my_any?(args=nil)
+  if args.nil? == false && args.is_a?(Class) == false
+    if args.is_a?(Regexp)
+      my_each { |i| return true if !i[args].nil? || i[args] == 1 } # if Regexp
+    else
+      my_each { |i| return true if i == args }
+    end
+  elsif args.is_a?(Class)
+    my_each { |i| return true if i.is_a?(args) }
+
+  # if not Regexp
+
+  elsif args.nil? && block_given?
+    my_each { |i| return true if yield i }
+  else
+    my_each { |i| return false unless i.nil? || i == false }
+  end
+  false
+end
+#-------------------my_none?-----------------------
+def my_none?(args = nil)
+  if args.nil? == false && args.is_a?(Class) == false
+    if args.is_a?(Regexp)
+      my_each { |i| return false unless i[args].nil? || i[args] != 1 } # if Regexp
+    else
+      my_each { |i| return false unless i != args }
+    end
+  elsif args.is_a?(Class)
+    my_each { |i| return false unless !i.is_a?(args) }
+
+  elsif args.nil? && block_given?
+    my_each { |i| return false unless !yield i }
+  else
+    my_each { |i| return false unless i.nil? || i != false }
+  end
+  true
+end
+#-------------------my_count-----------------------
+def my_count(args = nil)
+  count=0
+  if !args.nil?
+    my_each{|x| count += 1 if x==args}
+  elsif args.nil? && block_given?
+    my_each { |x| count +=1 if yield (x) }
+   else my_each{count += 1 }
+   end 
+   count   
+end
+
+ # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 end
