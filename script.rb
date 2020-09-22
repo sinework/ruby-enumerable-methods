@@ -69,13 +69,10 @@ module Enumerable
       end
     elsif args.is_a?(Class)
       my_each { |i| return true if i.is_a?(args) }
-
-    # if not Regexp
-
     elsif args.nil? && block_given?
       my_each { |i| return true if yield i }
     else
-      my_each { |i| return false unless i.nil? || i == false }
+      my_each { |i| return true if i == true }
     end
     false
   end
@@ -84,7 +81,7 @@ module Enumerable
   def my_none?(args = nil)
     if args.nil? == false && args.is_a?(Class) == false
       if args.is_a?(Regexp)
-        my_each { |i| return false unless i[args].nil? || i[args] != 1 } # if Regexp
+        my_each { |i| return false if i =~ args } # if Regexp
       else
         my_each { |i| return false unless i != args }
       end
@@ -94,7 +91,7 @@ module Enumerable
     elsif args.nil? && block_given?
       my_each { |i| return false if yield i }
     else
-      my_each { |i| return false unless i.nil? || i != false }
+      my_each { |i| return false if i == true }
     end
     true
   end
@@ -142,11 +139,10 @@ module Enumerable
       raise LocalJumpError, 'No block Given or Empty Argument' unless !arg1.nil? && !arg2.nil? && !block_given?
     end
   end
+end
+#-------------------multiply_els-----------------------
+def multiply_els(arg)
+  raise TypeError, 'No Array Given' if arg.nil? || !arg.is_a?(Array)
 
-  #-------------------multiply_els-----------------------
-  def multiply_els(arr)
-    raise TypeError, 'No Array Given' if arg.nil? || !arg.is_a?(Array)
-
-    arr.my_inject { |result, element| result * element }
-  end
+  arg.my_inject { |result, element| result * element }
 end
