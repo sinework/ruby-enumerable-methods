@@ -1,22 +1,23 @@
 AllCops:
   Exclude:
+    - "README.md"
     - "Guardfile"
     - "Rakefile"
-
+  NewCops: enable
   DisplayCopNames: true
-
 Layout/LineLength:
-  Max: 120
+  Max: 200
 Metrics/MethodLength:
   Max: 20
 Metrics/AbcSize:
   Max: 50
+Metrics/ModuleLength:
+  Max: 150
 Metrics/ClassLength:
   Max: 150
 Metrics/BlockLength:
-  ExcludedMethods: ['describe']
+  ExcludedMethods: ["describe"]
   Max: 30
-
 
 Style/Documentation:
   Enabled: false
@@ -30,7 +31,10 @@ Style/DefWithParentheses:
   Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
-
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
 Layout/HashAlignment:
   EnforcedColonStyle: key
 Layout/ExtraSpacing:
