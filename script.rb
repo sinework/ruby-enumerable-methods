@@ -2,7 +2,7 @@ module Enumerable
   # -----------my_each methods--------------
 
   def my_each
-    return to_enum unless block_given?
+    return to_enum(:my_each) unless block_given?
 
     index = 0
     arr = to_a
@@ -146,3 +146,5 @@ def multiply_els(arg)
 
   arg.my_inject { |result, element| result * element }
 end
+
+puts [1, 2, 3, 5, 1, 7, 3].my_each  == [1, 2, 3, 5, 1, 7, 3].each
