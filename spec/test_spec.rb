@@ -43,7 +43,46 @@ describe Enumerable do
       end
     end
   end
+   # my_select
+   describe '#my_select' do
+    context 'No block given' do
+      it 'should return an enumerable' do
+        expect(test_array3.my_select).to be_a(Enumerable)
+      end
+    end
+    context 'Block given' do
+      it 'The return should be the same as the select method' do
+        expect(test_array3.my_select { |num| num.even?}).to eq(test_array3.select { |num| num.even?})
+      end
+    end
+  end
+# my_all?
+  describe '#my_all?' do
+    context 'Argument is a Regexp' do
+      it 'the return should be false for this argument' do
+        expect(test_array2.my_all?(/d/)).to eql(false)
+      end
+    end
 
+    context 'No block given' do
+      it 'The return should be the same as the all? method' do
+        expect(test_array2.my_all? { |word| word.length >= 3 }).to eq(test_array2.all? { |word| word.length >= 3 })
+      end
+    end
+  end
+#   my_any?
+  describe '#my_any?' do
+    context 'Argument is a Regexp' do
+      it 'the return should be false for this argument' do
+        expect(test_array2.my_any?(/d/)).to eql(false)
+      end
+    end
+    context 'No argument is given' do
+      it 'The return should be the same as the all? method' do
+        expect(test_array2.my_any? { |word| word.length >= 3 }).to eq(test_array2.any? { |word| word.length >= 3 })
+      end
+    end
+  end
   # my_none?
 
   describe '#my_none?' do
