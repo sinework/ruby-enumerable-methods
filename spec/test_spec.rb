@@ -44,7 +44,7 @@ describe Enumerable do
     end
   end
 
-   # my_none?
+  # my_none?
 
   describe '#my_none?' do
     it "loops through the array with string elements and returns the boolean value of true or false based on given condtion" do
@@ -90,5 +90,45 @@ describe Enumerable do
     it 'when a block is not given then it return an enumerator' do
       expect(test_array1.my_map). to be_a(Enumerator)
     end
+	end
+
+	# my_count
+
+	describe '#my_count' do
+		it 'returns the number of items in array after looping through the array.' do
+			expect(test_array1.my_count(&:odd?)).to eql(6)
+		end
+
+		it "returns the number of items in the array that matches the argument." do
+			expect(test_array3.my_count(1)).to eql(3)
+		end
+
+		it 'counts the number of items that are present in the array, when a block is not given' do
+			expect(test_array1.my_count).to eql(test_array1.length)
+		end
+
+		it 'counts the number of items that are present in the range when a block is not given and a range is given' do
+			expect(range.my_count).to eql(range.count)
+		end
+	end
+
+	#my_inject
+
+	describe '#my_inject' do
+		it 'returns the Sum of all the element of the array' do
+		expect(test_array1.my_inject(:+)).to eql(22)
+		end	
+
+		it 'returns the Sum of all the element of the range' do
+			expect(range.my_inject { |total, item| total + item }).to eql(45)
+		end
+
+		it ' multiply numbers inside an array or range when an accumulator and a symbol are passed as arguments' do
+			expect((1..10).my_inject(2, :*)).to eql(7_257_600)
+		end
+
+		it 'executes and return the result when an array or a range range is given with proc' do
+			expect(test_array2.my_inject(&search)).to eql('bear')
+		end
 	end
 end
