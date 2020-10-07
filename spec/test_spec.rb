@@ -13,6 +13,37 @@ describe Enumerable do
 	let(:search) { proc { |memo, word| memo.length > word.length ? memo : word } }
 	let(:hash) { { x: 100, y: 120, u: 150, v: 130 } }
 
+# my_each
+  describe '#my_each' do
+    context 'No block given' do
+      it 'should return an enumerable' do
+        expect(test_array1.my_each).to be_a(Enumerable)
+      end
+    end
+    context 'Block given' do
+      it 'The return should be the same as the each method' do
+        expect(test_array1.my_each { |x| puts x }).to eq(test_array1.each { |x| puts x })
+      end
+    end
+  end
+# My_each_with_index
+  describe '#my_each_with_index' do
+    context 'No block given' do
+      it 'should return an enumerable' do
+        expect(test_array3.my_each_with_index).to be_a(Enumerable)
+      end
+    end
+    context 'Block given' do
+      it 'The return should be the same as each_with_index method' do
+        expect(%w[any k a b c d e].my_each_with_index do |item, index|
+                 puts "#{item} : #{index}"
+               end).to eq(%w[any k a b c d e].each_with_index do |item, index|
+                            puts "#{item} : #{index}"
+                          end)
+      end
+    end
+  end
+
    # my_none?
 
   describe '#my_none?' do
