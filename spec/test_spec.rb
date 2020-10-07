@@ -1,19 +1,18 @@
-require_relative "../script.rb"
+require_relative '../script'
 
 describe Enumerable do
+  let(:test_array1) { [1, 2, 3, 5, 1, 7, 3] }
+  let(:test_array2) { %w[ant bear cat] }
+  let(:test_array3) { [1, 1, 1] }
+  let(:test_array4) { [1, 1, nil] }
+  let(:test_array5) { [nil, false, nil] }
+  let(:my_proc) { proc { |x| x + 1 } }
+  let(:my_block) { |sum, i| sum + i }
+  let(:range) { (1...10) }
+  let(:search) { proc { |memo, word| memo.length > word.length ? memo : word } }
+  let(:hash) { { x: 100, y: 120, u: 150, v: 130 } }
 
-    let(:test_array1) { [1, 2, 3, 5, 1, 7, 3] }
-    let(:test_array2) { %w[ant bear cat] }
-    let(:test_array3) { [1, 1, 1] }
-    let(:test_array4) { [1, 1, nil] }
-    let(:test_array5) { [nil, false, nil] }
-    let(:my_proc) { proc { |x| x + 1 } }
-    let(:my_block) { |sum, i| sum + i }
-    let(:range) { (1...10) }
-	let(:search) { proc { |memo, word| memo.length > word.length ? memo : word } }
-	let(:hash) { { x: 100, y: 120, u: 150, v: 130 } }
-
-# my_each
+  # my_each
   describe '#my_each' do
     context 'No block given' do
       it 'should return an enumerable' do
@@ -26,7 +25,7 @@ describe Enumerable do
       end
     end
   end
-# My_each_with_index
+  # My_each_with_index
   describe '#my_each_with_index' do
     context 'No block given' do
       it 'should return an enumerable' do
@@ -43,8 +42,8 @@ describe Enumerable do
       end
     end
   end
-   # my_select
-   describe '#my_select' do
+  # my_select
+  describe '#my_select' do
     context 'No block given' do
       it 'should return an enumerable' do
         expect(test_array3.my_select).to be_a(Enumerable)
@@ -52,11 +51,11 @@ describe Enumerable do
     end
     context 'Block given' do
       it 'The return should be the same as the select method' do
-        expect(test_array3.my_select { |num| num.even?}).to eq(test_array3.select { |num| num.even?})
+        expect(test_array3.my_select(&:even?)).to eq(test_array3.select(&:even?))
       end
     end
   end
-# my_all?
+  # my_all?
   describe '#my_all?' do
     context 'Argument is a Regexp' do
       it 'the return should be false for this argument' do
@@ -70,7 +69,7 @@ describe Enumerable do
       end
     end
   end
-#   my_any?
+  #   my_any?
   describe '#my_any?' do
     context 'Argument is a Regexp' do
       it 'the return should be false for this argument' do
@@ -86,7 +85,7 @@ describe Enumerable do
   # my_none?
 
   describe '#my_none?' do
-    it "loops through the array with string elements and returns the boolean value of true or false based on given condtion" do
+    it 'loops through the array with string elements and returns the boolean value of true or false based on given condtion' do
       expect(test_array2.my_none? { |word| word.size >= 5 }).to be(true)
     end
 
@@ -105,9 +104,9 @@ describe Enumerable do
     it 'it returns true when an empty array is given' do
       expect([].my_none?).to be(true)
     end
-	end
-	
-	# my_map
+  end
+
+  # my_map
 
   describe '#my_map' do
     it 'return a new array after executing the given condition for a block' do
@@ -127,47 +126,47 @@ describe Enumerable do
     end
 
     it 'when a block is not given then it return an enumerator' do
-      expect(test_array1.my_map). to be_a(Enumerator)
+      expect(test_array1.my_map).to be_a(Enumerator)
     end
-	end
+  end
 
-	# my_count
+  # my_count
 
-	describe '#my_count' do
-		it 'returns the number of items in array after looping through the array.' do
-			expect(test_array1.my_count(&:odd?)).to eql(6)
-		end
+  describe '#my_count' do
+    it 'returns the number of items in array after looping through the array.' do
+      expect(test_array1.my_count(&:odd?)).to eql(6)
+    end
 
-		it "returns the number of items in the array that matches the argument." do
-			expect(test_array3.my_count(1)).to eql(3)
-		end
+    it 'returns the number of items in the array that matches the argument.' do
+      expect(test_array3.my_count(1)).to eql(3)
+    end
 
-		it 'counts the number of items that are present in the array, when a block is not given' do
-			expect(test_array1.my_count).to eql(test_array1.length)
-		end
+    it 'counts the number of items that are present in the array, when a block is not given' do
+      expect(test_array1.my_count).to eql(test_array1.length)
+    end
 
-		it 'counts the number of items that are present in the range when a block is not given and a range is given' do
-			expect(range.my_count).to eql(range.count)
-		end
-	end
+    it 'counts the number of items that are present in the range when a block is not given and a range is given' do
+      expect(range.my_count).to eql(range.count)
+    end
+  end
 
-	#my_inject
+  # my_inject
 
-	describe '#my_inject' do
-		it 'returns the Sum of all the element of the array' do
-		expect(test_array1.my_inject(:+)).to eql(22)
-		end	
+  describe '#my_inject' do
+    it 'returns the Sum of all the element of the array' do
+      expect(test_array1.my_inject(:+)).to eql(22)
+    end
 
-		it 'returns the Sum of all the element of the range' do
-			expect(range.my_inject { |total, item| total + item }).to eql(45)
-		end
+    it 'returns the Sum of all the element of the range' do
+      expect(range.my_inject { |total, item| total + item }).to eql(45)
+    end
 
-		it ' multiply numbers inside an array or range when an accumulator and a symbol are passed as arguments' do
-			expect((1..10).my_inject(2, :*)).to eql(7_257_600)
-		end
+    it ' multiply numbers inside an array or range when an accumulator and a symbol are passed as arguments' do
+      expect((1..10).my_inject(2, :*)).to eql(7_257_600)
+    end
 
-		it 'executes and return the result when an array or a range range is given with proc' do
-			expect(test_array2.my_inject(&search)).to eql('bear')
-		end
-	end
+    it 'executes and return the result when an array or a range range is given with proc' do
+      expect(test_array2.my_inject(&search)).to eql('bear')
+    end
+  end
 end
