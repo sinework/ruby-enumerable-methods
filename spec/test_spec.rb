@@ -11,9 +11,8 @@ describe Enumerable do
   let(:range) { (1...10) }
   let(:search) { proc { |memo, word| memo.length > word.length ? memo : word } }
   let(:hash) { { x: 100, y: 120, u: 150, v: 130 } }
- 
-   let(:test_array1_clone) {test_array1.clone}
 
+  let(:test_array1_clone) { test_array1.clone }
 
   # my_each
   describe '#my_each' do
@@ -22,12 +21,11 @@ describe Enumerable do
         expect(test_array1.my_each).to be_a(Enumerable)
       end
     end
-    context "Checking for mutuation" do
-  
-    it "Should return the original array" do
-      test_array1.my_each { |num| num + 1 }
-       expect(test_array1).to eq(test_array1_clone)
-    end
+    context 'Checking for mutuation' do
+      it 'Should return the original array' do
+        test_array1.my_each { |num| num + 1 }
+        expect(test_array1).to eq(test_array1_clone)
+      end
     end
     context 'Block given' do
       it 'The return should be the same as the each method' do
@@ -42,13 +40,12 @@ describe Enumerable do
         expect(test_array3.my_each_with_index).to be_a(Enumerable)
       end
     end
-    context "Checking for mutuation" do
-  
-      it "Should return the original array" do
+    context 'Checking for mutuation' do
+      it 'Should return the original array' do
         test_array1.my_each_with_index { |num| num + 1 }
-         expect(test_array1).to eq(test_array1_clone)
+        expect(test_array1).to eq(test_array1_clone)
       end
-      end
+    end
     context 'Block given' do
       it 'The return should be the same as each_with_index method' do
         expect(%w[any k a b c d e].my_each_with_index do |item, index|
@@ -71,13 +68,12 @@ describe Enumerable do
         expect(test_array3.my_select(&:even?)).to eq(test_array3.select(&:even?))
       end
     end
-    context "Checking for mutuation" do
-  
-      it "Should return the original array" do
+    context 'Checking for mutuation' do
+      it 'Should return the original array' do
         test_array1.my_select { |num| num + 1 }
-         expect(test_array1).to eq(test_array1_clone)
+        expect(test_array1).to eq(test_array1_clone)
       end
-      end
+    end
   end
   # my_all?
   describe '#my_all?' do
@@ -86,13 +82,12 @@ describe Enumerable do
         expect(test_array2.my_all?(/d/)).to eql(false)
       end
     end
-    context "Checking for mutuation" do
-  
-      it "Should return the original array" do
+    context 'Checking for mutuation' do
+      it 'Should return the original array' do
         test_array1.my_all? { |num| num + 1 }
-         expect(test_array1).to eq(test_array1_clone)
+        expect(test_array1).to eq(test_array1_clone)
       end
-      end
+    end
     context 'No block given' do
       it 'The return should be the same as the all? method' do
         expect(test_array2.my_all? { |word| word.length >= 3 }).to eq(test_array2.all? { |word| word.length >= 3 })
@@ -100,7 +95,7 @@ describe Enumerable do
     end
     context 'Checking for Integer' do
       it 'should return true if all condition mathces with the given case' do
-        expect(test_array3.my_any? {|x| x.is_a?(Integer) }).to be true
+        expect(test_array3.my_any? { |x| x.is_a?(Integer) }).to be true
       end
     end
   end
@@ -111,13 +106,12 @@ describe Enumerable do
         expect(test_array2.my_any?(/d/)).to eql(false)
       end
     end
-    context "Checking for mutuation" do
-  
-      it "Should return the original array" do
+    context 'Checking for mutuation' do
+      it 'Should return the original array' do
         test_array1.my_any? { |num| num + 1 }
-         expect(test_array1).to eq(test_array1_clone)
+        expect(test_array1).to eq(test_array1_clone)
       end
-      end
+    end
 
     context 'No argument is given' do
       it 'The return should be the same as the all? method' do
@@ -126,7 +120,7 @@ describe Enumerable do
     end
     context 'Checking for Integer' do
       it 'should return true if any condition mathces with the given case' do
-        expect(test_array3.my_any? {|x| x.is_a?(Integer) }).to be true
+        expect(test_array3.my_any? { |x| x.is_a?(Integer) }).to be true
       end
     end
   end
@@ -152,17 +146,15 @@ describe Enumerable do
     it 'it returns true when an empty array is given' do
       expect([].my_none?).to be(true)
     end
-    
-  
-      it "Should return the original array" do
-        test_array1.my_each_with_index { |num| num + 1 }
-         expect(test_array1).to eq(test_array1_clone)
-      end
-      
-        it 'should return true if none of the condition mathces with the given case' do
-          expect(test_array2.my_none? {|x| x.is_a?(Integer) }).to be true
-        end
-      
+
+    it 'Should return the original array' do
+      test_array1.my_each_with_index { |num| num + 1 }
+      expect(test_array1).to eq(test_array1_clone)
+    end
+
+    it 'should return true if none of the condition mathces with the given case' do
+      expect(test_array2.my_none? { |x| x.is_a?(Integer) }).to be true
+    end
   end
 
   # my_map
