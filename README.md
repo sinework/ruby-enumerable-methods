@@ -33,6 +33,12 @@ $ git clone https://github.com/sinework/ruby-enumerable-methods.git
 
 ## Authors
 
+👤 **Abhigyan Mahanta**
+
+- Github: [@Abhigyan001](https://github.com/Abhigyan001)
+- Twitter: [@abhigyan_001](https://twitter.com/abhigyan_001)
+- Linkedin: [Abhigyan Mahanta](https://www.linkedin.com/in/abhigyan-mahanta-b49799145/)
+
 👤 **Sinework Amare Shiferaw**
 
 - Github: [@sinework](https://github.com/sinework)
