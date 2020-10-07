@@ -2,6 +2,7 @@
 
 This is the second project in the microverse ruby module that required us to recreate the enumerable methods ruby in cutsom methods.
 Recreated enumerable methods are listed below
+
 ### Enumerable Methods List:
 
 - my_each
@@ -31,6 +32,8 @@ $ cd <folder>
 $ git clone https://github.com/sinework/ruby-enumerable-methods.git
 ```
 
+<img src="image/ss.PNG" alt="ssofoutput">
+
 ## Authors
 
 👤 **Abhigyan Mahanta**
@@ -49,14 +52,14 @@ $ git clone https://github.com/sinework/ruby-enumerable-methods.git
 
 Contributions, issues and feature requests are welcome!
 
-
 ## Show your support
 
 Give a ⭐️ if you like this project!
 
-
 ## Acknowledgments
 
 - Project originally taken from The Odin Project
+
 ## Copyright
+
 All rights reserved to Sinework
